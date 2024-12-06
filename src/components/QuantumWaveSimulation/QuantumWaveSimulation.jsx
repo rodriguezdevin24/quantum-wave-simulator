@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import WaveCanvas from './WaveCanvas';
 import Slider from './Slider';
+import WaveTypeSelector from './WaveTypeSelector';
 
 const QuantumWaveSimulation = () => {
   const [wavelength, setWavelength] = useState(50);
   const [amplitude, setAmplitude] = useState(1);
+  const [waveType, setWaveType] = useState('sine');
 
   return (
     <div className="absolute inset-0 flex items-center justify-center">
@@ -12,6 +14,12 @@ const QuantumWaveSimulation = () => {
         <h2 className="text-xl font-bold mb-4 text-center">
           Quantum Wave Simulator
         </h2>
+        
+        <WaveTypeSelector 
+          currentWaveType={waveType} 
+          onWaveTypeChange={setWaveType} 
+        />
+        
         <Slider
           label="Wavelength"
           value={wavelength}
@@ -20,6 +28,7 @@ const QuantumWaveSimulation = () => {
           step={1}
           onChange={(e) => setWavelength(Number(e.target.value))}
         />
+        
         <Slider
           label="Amplitude"
           value={amplitude.toFixed(2)}
@@ -28,10 +37,16 @@ const QuantumWaveSimulation = () => {
           step={0.1}
           onChange={(e) => setAmplitude(Number(e.target.value))}
         />
-        <WaveCanvas wavelength={wavelength} amplitude={amplitude} />
+        
+        <WaveCanvas 
+          wavelength={wavelength} 
+          amplitude={amplitude} 
+          waveType={waveType} 
+        />
+        
         <p className="text-sm mt-2 text-white-600 text-center">
-          This simulation demonstrates a basic wave function visualization.
-          Adjust wavelength and amplitude to explore quantum wave behavior.
+          Explore different wave types: Sine, Square, and Gaussian waves.
+          Adjust wavelength and amplitude to visualize quantum wave behavior.
         </p>
       </div>
     </div>

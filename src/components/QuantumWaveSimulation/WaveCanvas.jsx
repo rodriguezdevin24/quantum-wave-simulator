@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import useWaveCanvas from './useWaveCanvas';
 
-const WaveCanvas = ({ wavelength, amplitude }) => {
+const WaveCanvas = ({ wavelength, amplitude, waveType }) => {
   const canvasRef = useRef(null);
-  useWaveCanvas(canvasRef, wavelength, amplitude);
+  useWaveCanvas(canvasRef, wavelength, amplitude, waveType);
 
   return (
     <canvas
@@ -17,8 +17,9 @@ const WaveCanvas = ({ wavelength, amplitude }) => {
 };
 
 WaveCanvas.propTypes = {
-    wavelength: PropTypes.number.isRequired,
-    amplitude: PropTypes.number.isRequired,
-  };
+  wavelength: PropTypes.number.isRequired,
+  amplitude: PropTypes.number.isRequired,
+  waveType: PropTypes.oneOf(['sine', 'square', 'gaussian']).isRequired,
+};
 
 export default WaveCanvas;
